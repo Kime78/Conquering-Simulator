@@ -1,0 +1,55 @@
+*
+{
+box-sizing: border-box;
+}
+.generator
+{
+  border: 2px solid greenyellow;
+  border-radius:  20px;
+  background-color: lightgrey;
+  text-align: center;
+  width: 300px;
+  padding: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+.generator-container
+{
+    display: flex;
+    width: 600px;
+   flex-wrap:  wrap;
+    margin: auto;
+}
+#currency 
+{
+    user-select: none;
+    text-align: center;
+    font-size: 40px;
+    margin: 40px;
+}
+.generator.locked {
+  
+    border: 2px solid rgb(212, 90, 90);
+  }
+.generator.invisible
+{
+  display: none;
+}
+#myProgress {
+     text-align: center; 
+  line-height: 30px; 
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  background-color: grey;
+
+}
+
+#myBar {
+  width: 0%;
+  height: 30px;
+  background-color: #4CAF50;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white; 
+}

@@ -57,13 +57,14 @@ function move() {
 }
 function calculateprogress()
 {
-  widthh = money / 1e14
+  let power = Math.floor(Math.log10(money))
+  widthh = (power/82)
   widthh = widthh.toFixed(2) * 100 
   return widthh
 }
 function updateGUI() {
   var elem = document.getElementById("myBar"); 
-  
+  elem.textContent = calculateprogress() + '%'
   
   elem.style.width = calculateprogress() + '%';
   document.getElementById("currency").textContent = "You have " + format(money) + " Gold"

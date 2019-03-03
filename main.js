@@ -2,6 +2,8 @@ var money = 10
 var generators = []
 var lastUpdate = Date.now()
 var widthh = 0
+var pretiege1cost = 5
+var canprestige1 = false 
 document.getElementById("gen3").classList.add("invisible")
 document.getElementById("gen4").classList.add("invisible")
 document.getElementById("gen5").classList.add("invisible")
@@ -12,7 +14,9 @@ for (let i = 0; i < 6; i++) {
     cost: Math.pow(Math.pow(10, i), i) * 10,
     bought: 0,
     amount: 0,
-    mult: 1
+    mult: 1,
+    pr1mult: 1,
+    canpr1: false
   }
   generators.push(generator)
 }
@@ -55,6 +59,25 @@ function move() {
     }
   }
 }
+function pretiege1()
+{
+ pretiege1cost *= 2.5
+ for(let i = 0;i < 6; i++)
+ {
+   let g = generators[i]
+   if(g.canpr1)
+  { g.pr1mult *= 1.5}
+
+   g.amount = 0
+   g.bought = 0
+   g.cost = Math.pow(Math.pow(10, i), i) * 10
+   g.mult = 1
+   money = 10
+   document.getElementById("gen" + (i + 1)).classList.remove("canprestige")
+   canprestige1 = false
+   
+ }
+}
 function calculateprogress()
 {
   let power = Math.floor(Math.log10(money))
@@ -63,6 +86,27 @@ function calculateprogress()
   return widthh
 }
 function updateGUI() {
+  for(let i = 0; i < 6; i++)
+  {
+    let g = generators[i]
+  
+    if(g.bought >= pretiege1cost)
+    {
+      g.canpr1 = true
+      document.getElementById("gen" + (i + 1)).classList.add("canprestige")
+      canprestige1 = true
+      
+    }
+   
+  }
+if(canprestige1)
+{
+  document.getElementById("prestigeb1").innerHTML = "Prestige" 
+}
+else
+{
+  document.getElementById("prestigeb1").innerHTML = "" 
+}
   var elem = document.getElementById("myBar"); 
   elem.textContent = calculateprogress() + '%'
   
@@ -77,9 +121,9 @@ function updateGUI() {
 }
 
 function productionLoop(diff) {
-  money += generators[0].amount * generators[0].mult * diff
+  money += generators[0].amount * generators[0].mult * generators[0].pr1mult * diff
   for (let i = 1; i < 6; i++) {
-    generators[i - 1].amount += generators[i].amount * generators[i].mult * diff / 5
+    generators[i - 1].amount += generators[i].amount * generators[i].mult * generators[i].pr1mult * diff / 5
   }
 }
 

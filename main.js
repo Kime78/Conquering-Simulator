@@ -1,5 +1,5 @@
-var money = 10
-var generators = []
+
+
 var lastUpdate = Date.now()
 var widthh = 0
 var pretiege1cost = 5
@@ -8,8 +8,33 @@ document.getElementById("gen3").classList.add("invisible")
 document.getElementById("gen4").classList.add("invisible")
 document.getElementById("gen5").classList.add("invisible")
 document.getElementById("gen6").classList.add("invisible")
-
-for (let i = 0; i < 6; i++) {
+var player = {
+  money : 10,
+ generators : getGens(),
+}
+function saveGame() {
+  localStorage.setItem('save', btoa(JSON.stringify(player)));
+}
+function loadGame(save) {
+  if (save === undefined) {
+    save = localStorage.getItem('save');
+    if (!save) {
+      save = localStorage.getItem('save');
+    }
+  }
+  if (save) {
+    proposedPlayer = JSON.parse(atob(save));
+    if (proposedPlayer !== undefined) {
+      player = proposedPlayer;
+    
+    }
+  }
+}
+function getGens()
+{
+  let generators= []
+  for (let i = 0; i < 6; i++)
+ {
   let generator = {
     cost: Math.pow(Math.pow(10, i), i) * 10,
     bought: 0,
@@ -18,9 +43,28 @@ for (let i = 0; i < 6; i++) {
     pr1mult: 1,
     canpr1: false
   }
-  generators.push(generator)
+ generators.push(generator)
 }
 
+return generators;
+}
+function canBuyGenerator(i) {
+  return player.generators[i].cost<=(player.money);
+}
+function maxall()
+{
+ for(i = 1;i <= 6;i++)
+ {
+ let g = player.generators[i]
+ while(canBuyGenerator(i-1))
+ buyGenerator(i);
+ }
+}
+
+function hidegentab()
+{
+  document.getElementById("gentab").classList.add("hidden")
+}
 function format(amount) {
   let power = Math.floor(Math.log10(amount))
   let mantissa = amount / Math.pow(10, power)
@@ -29,16 +73,16 @@ function format(amount) {
 }
 function uninv(i)
 {
-  let g = generators[i]
+  let g = player.generators[i]
   if (i == 6)
   return
   document.getElementById("gen" + (i + 1)).classList.remove("invisible")
 }
 
 function buyGenerator(i) {
-  let g = generators[i - 1]
-  if (g.cost > money) return
-  money -= g.cost
+  let g = player.generators[i - 1]
+  if (g.cost > player.money) return
+  player.money -= g.cost
   uninv(i);
   g.amount += 1
   g.bought += 1
@@ -64,7 +108,7 @@ function pretiege1()
  pretiege1cost *= 2.5
  for(let i = 0;i < 6; i++)
  {
-   let g = generators[i]
+   let g = player.generators[i]
    if(g.canpr1)
   { g.pr1mult *= 1.5}
 
@@ -72,7 +116,7 @@ function pretiege1()
    g.bought = 0
    g.cost = Math.pow(Math.pow(10, i), i) * 10
    g.mult = 1
-   money = 10
+   player.money = 10
    document.getElementById("gen" + (i + 1)).classList.remove("canprestige")
    canprestige1 = false
    
@@ -80,7 +124,7 @@ function pretiege1()
 }
 function calculateprogress()
 {
-  let power = Math.floor(Math.log10(money))
+  let power = Math.floor(Math.log10(player.money))
   widthh = (power/82)
   widthh = widthh.toFixed(2) * 100 
   return widthh
@@ -88,7 +132,7 @@ function calculateprogress()
 function updateGUI() {
   for(let i = 0; i < 6; i++)
   {
-    let g = generators[i]
+    let g = player.generators[i]
   
     if(g.bought >= pretiege1cost)
     {
@@ -111,19 +155,19 @@ else
   elem.textContent = calculateprogress() + '%'
   
   elem.style.width = calculateprogress() + '%';
-  document.getElementById("currency").textContent = "You have " + format(money) + " Gold"
+  document.getElementById("currency").textContent = "You have " + format(player.money) + " Gold"
   for (let i = 0; i < 6; i++) {
-    let g = generators[i]
+    let g = player.generators[i]
     document.getElementById("gen" + (i + 1)).innerHTML = "Amount: " + format(g.amount) + "<br>Bought: " + g.bought + "<br>Mult: " + format(g.mult) + "x<br>Cost: " + format(g.cost)
-    if (g.cost > money) document.getElementById("gen" + (i + 1)).classList.add("locked")
+    if (g.cost > player.money) document.getElementById("gen" + (i + 1)).classList.add("locked")
     else document.getElementById("gen" + (i + 1)).classList.remove("locked")
   }
 }
 
 function productionLoop(diff) {
-  money += generators[0].amount * generators[0].mult * generators[0].pr1mult * diff
+  player.money += player.generators[0].amount * player.generators[0].mult * player.generators[0].pr1mult * diff
   for (let i = 1; i < 6; i++) {
-    generators[i - 1].amount += generators[i].amount * generators[i].mult * generators[i].pr1mult * diff / 5
+    player.generators[i - 1].amount += player.generators[i].amount * player.generators[i].mult * player.generators[i].pr1mult * diff / 5
   }
 }
 
@@ -135,7 +179,8 @@ function mainLoop() {
 
   lastUpdate = Date.now()
 }
-
+loadGame()
 setInterval(mainLoop, 50)
+setInterval(saveGame,1000)
 
 updateGUI()

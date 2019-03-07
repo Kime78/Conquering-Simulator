@@ -14,6 +14,22 @@ box-sizing: border-box;
   cursor: pointer;
   user-select: none;
 }
+.maxallclass{
+  position: relative;
+  border: 2px solid greenyellow;
+  border-radius: 20px;
+  padding: 5px;
+  background-color: lightgray;
+  width: 100px;
+  text-align: center;
+  left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  top: 14%;
+    cursor: pointer;
+    user-select: none;
+  
+}
 .generator-container
 {
     display: flex;
@@ -24,8 +40,10 @@ box-sizing: border-box;
 .prestiegecontainer
 {
     position: absolute;
-    bottom : 40%;
-    left: 41.5%;
+    bottom : 20%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
     width: 600px;
    border: 2px solid greenyellow;
   border-radius:  20px;
@@ -70,7 +88,9 @@ box-sizing: border-box;
   background-color: grey;
 
 }
-
+#gentab{
+  
+}
 #myBar {
   width: 0%;
   height: 30px;

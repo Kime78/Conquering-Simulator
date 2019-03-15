@@ -63,7 +63,7 @@ function maxall()
 
 function hidegentab()
 {
-  document.getElementById("gentab").classList.add("hidden")
+  document.getElementById("pc1").classList.add("hidden")
 }
 function format(amount) {
   let power = Math.floor(Math.log10(amount))
@@ -103,24 +103,43 @@ function move() {
     }
   }
 }
-function pretiege1()
-{
- pretiege1cost *= 2.5
- for(let i = 0;i < 6; i++)
- {
-   let g = player.generators[i]
-   if(g.canpr1)
-  { g.pr1mult *= 1.5}
-
-   g.amount = 0
+function reset()
+{ 
+  for(let i = 0;i < 6; i++)
+  {
+     let g = player.generators[i] 
+     g.pr1mult = 1
+  g.amount = 0
    g.bought = 0
    g.cost = Math.pow(Math.pow(10, i), i) * 10
    g.mult = 1
    player.money = 10
-   document.getElementById("gen" + (i + 1)).classList.remove("canprestige")
-   canprestige1 = false
+  }
+  pretiege1cost = 5
+}
+function pretiege1()
+{
+ pretiege1cost = Math.floor(Math.log10(player.money)) * 1.75;
+ for(let i = 0;i < 6; i++)
+ { 
+  let g = player.generators[i] 
+  if(g.amount !=0)
+  {
+ 
+   g.pr1mult *= Math.floor(Math.log10(player.money))
+   g.amount = 0
+   g.bought = 0
+   g.cost = Math.pow(Math.pow(10, i), i) * 10
+   g.mult = 1
+  
+  }
+   
+  
+  
    
  }
+  canprestige1 = false 
+  player.money = 10
 }
 function calculateprogress()
 {
@@ -130,26 +149,21 @@ function calculateprogress()
   return widthh
 }
 function updateGUI() {
-  for(let i = 0; i < 6; i++)
-  {
-    let g = player.generators[i]
-  
-    if(g.bought >= pretiege1cost)
-    {
-      g.canpr1 = true
-      document.getElementById("gen" + (i + 1)).classList.add("canprestige")
-      canprestige1 = true
-      
-    }
-   
-  }
+  let power = Math.floor(Math.log10(player.money))
+  if(pretiege1cost <= power)
+  canprestige1 = true
+  else
+  canprestige1 = false
+
 if(canprestige1)
 {
-  document.getElementById("prestigeb1").innerHTML = "Prestige" 
+  document.getElementById("pc1").classList.remove("hidden")
+  document.getElementById("prestigeb1").innerHTML = "Loose all progress <br> but get a boost based on gold: " +  Math.floor(Math.log10(player.money)) + "<br>Currently: " + player.generators[0].pr1mult
 }
 else
 {
-  document.getElementById("prestigeb1").innerHTML = "" 
+  document.getElementById("pc1").classList.add("hidden")
+
 }
   var elem = document.getElementById("myBar"); 
   elem.textContent = calculateprogress() + '%'

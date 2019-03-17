@@ -60,7 +60,10 @@ function maxall()
  buyGenerator(i);
  }
 }
-
+document.onkeyup = function(e) {
+  if (e.which == 77) {
+    maxall()
+  }}
 function hidegentab()
 {
   document.getElementById("pc1").classList.add("hidden")
@@ -146,7 +149,10 @@ function calculateprogress()
   let power = Math.floor(Math.log10(player.money))
   widthh = (power/82)
   widthh = widthh.toFixed(2) * 100 
+  if(widthh <= 100)
   return widthh
+  else
+  return 100;
 }
 function updateGUI() {
   let power = Math.floor(Math.log10(player.money))
@@ -158,7 +164,7 @@ function updateGUI() {
 if(canprestige1)
 {
   document.getElementById("pc1").classList.remove("hidden")
-  document.getElementById("prestigeb1").innerHTML = "Loose all progress <br> but get a boost based on gold: " +  Math.floor(Math.log10(player.money)) + "<br>Currently: " + player.generators[0].pr1mult
+  document.getElementById("prestigeb1").innerHTML = "Loose all progress <br> but get a boost based on gold: " +  Math.floor(Math.log10(player.money)) 
 }
 else
 {

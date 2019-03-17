@@ -25,7 +25,7 @@ box-sizing: border-box;
   left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
-  top: 14%;
+  bottom: -129;
     cursor: pointer;
     user-select: none;
   
@@ -39,11 +39,9 @@ box-sizing: border-box;
 }
 .prestiegecontainer
 {
-    position: absolute;
-    bottom : 20%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    
+  bottom: -30;
     width: 600px;
    border: 2px solid greenyellow;
   border-radius:  20px;
@@ -82,14 +80,15 @@ box-sizing: border-box;
 #myProgress {
      text-align: center; 
   line-height: 30px; 
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
+  position: relative;
+  bottom: -875;
+  right: -50;
+  width: 95%;
   background-color: grey;
 
 }
-#gentab{
-  
+.generator-tab.hidden{
+  display: none;
 }
 #myBar {
   width: 0%;

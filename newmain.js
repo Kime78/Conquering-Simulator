@@ -1,7 +1,7 @@
 var lastUpdate = Date.now()
  x = new Decimal("1e30000000")
 var widthh = 0
-var pretiege1cost = 5
+
 var canprestige1 = false 
 document.getElementById("gen3").classList.add("invisible")
 document.getElementById("gen4").classList.add("invisible")
@@ -10,6 +10,11 @@ document.getElementById("gen6").classList.add("invisible")
 var player = {
     money : new Decimal(10),
     generators : getGens(),
+   pretiege1cost : 5,
+}
+function hidegentab()
+{
+  document.getElementById("gentab").classList.add("hidden")
 }
 function saveGame() {
     localStorage.setItem('save', btoa(JSON.stringify(player)));
@@ -90,10 +95,10 @@ document.onkeyup = function(e) {
   }
   
   function buyGenerator(i) {
-   
+    if (!canBuyGenerator(i)) return;
     let g = player.generators[i];
     player.money = Decimal.sub(player.money,g.cost)
-    uninv(i)
+    uninv(i+1)
     g.amount = Decimal.plus(g.amount,1);
     g.bought = Decimal.plus(g.bought,1);
     g.mult = Decimal.times(g.mult,1.05);
@@ -127,12 +132,12 @@ document.onkeyup = function(e) {
    g.mult = 1
    player.money = 10
   }
-  pretiege1cost = 5
+  player.pretiege1cost = 5
 }
 function pretiege1()
 {
-    pretiege1cost = Decimal.floor(player.money.log10())
- pretiege1cost = Math.floor(Math.log10(player.money)) * 1.75;
+    player.pretiege1cost = Decimal.floor(player.money.log10())
+ player.pretiege1cost = Math.floor(Math.log10(player.money)) * 1.75;
  for(let i = 0;i < 6; i++)
  { 
   let g = player.generators[i] 
@@ -167,7 +172,7 @@ function calculateprogress()
 }
 function updateGUI() {
     let power = Decimal.floor(Decimal.log10(player.money))
-    if(pretiege1cost <= power)
+    if(player.pretiege1cost <= power)
     canprestige1 = true
     else
     canprestige1 = false

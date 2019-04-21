@@ -1,5 +1,4 @@
-
-
+x = new Decimal(5) 
 var lastUpdate = Date.now()
 var widthh = 0
 var pretiege1cost = 5
@@ -53,10 +52,10 @@ function canBuyGenerator(i) {
 }
 function maxall()
 {
- for(i = 1;i <= 6;i++)
+  for(i = 0;i < 6;i++)
  {
- let g = player.generators[i]
- while(canBuyGenerator(i-1))
+
+ while(canBuyGenerator(i))
  buyGenerator(i);
  }
 }
@@ -83,10 +82,11 @@ function uninv(i)
 }
 
 function buyGenerator(i) {
+  uninv(i+1);
   let g = player.generators[i - 1]
   if (g.cost > player.money) return
   player.money -= g.cost
-  uninv(i);
+  
   g.amount += 1
   g.bought += 1
   g.mult *= 1.05

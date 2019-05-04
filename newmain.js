@@ -259,5 +259,5 @@ function updateGUI() {
   loadGame()
   setInterval(mainLoop, 50)
   setInterval(saveGame,1000)
-  setInterval(maxall,50)
+  
   updateGUI()

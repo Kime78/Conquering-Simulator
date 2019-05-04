@@ -53,6 +53,26 @@ box-sizing: border-box;
   user-select: none;
     margin: auto;
 }
+.prestigecontainer2
+{
+    position: relative;
+    
+  bottom: -500;
+    width: 600px;
+   border: 2px solid greenyellow;
+  border-radius:  20px;
+  background-color: lightgrey;
+  text-align: center;
+  width: 300px;
+  padding: 5px;
+  cursor: pointer;
+  user-select: none;
+    margin: auto;
+}
+.prestigecontainer2.hidden
+{
+  display: none;
+}
 .prestiegecontainer.hidden
 {
   display: none;

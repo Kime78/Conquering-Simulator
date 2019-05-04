@@ -8,9 +8,12 @@ document.getElementById("gen4").classList.add("invisible")
 document.getElementById("gen5").classList.add("invisible")
 document.getElementById("gen6").classList.add("invisible")
 var player = {
+  pr2mult : 1,
+  pr2cost : 100,
+   pretiege1cost : 5,
     money : new Decimal(10),
     generators : getGens(),
-   pretiege1cost : 5,
+  
 }
 function hidegentab()
 {
@@ -131,6 +134,8 @@ document.onkeyup = function(e) {
    g.cost = Decimal.pow(10, Math.pow(i, 2) + 1)
    g.mult = 1
    player.money = 10
+   player.pr2mult = 1;
+   player.pr2cost = 100;
   }
   player.pretiege1cost = 5
 }
@@ -141,16 +146,15 @@ function pretiege1()
  for(let i = 0;i < 6; i++)
  { 
   let g = player.generators[i] 
-  if(g.amount !=0)
-  {
+
  
-   g.pr1mult *= Decimal.floor(player.money.log10())
+   g.pr1mult += ( Decimal.floor(player.money.log10()) *100) * player.pr2mult;
    g.amount = 0
    g.bought = 0
    g.cost = Decimal.pow(10, Math.pow(i, 2) + 1)
    g.mult = 1
   
-  }
+
    
   
   
@@ -158,6 +162,33 @@ function pretiege1()
  }
   canprestige1 = false 
   player.money = 10
+}
+function canprestige2()
+{
+  let power = Decimal.floor(Decimal.log10(player.money))
+  if(power >= player.pr2cost && player.generators[0].pr1mult >= 10000)
+  return true;
+  return false;
+}
+function prestige2()
+{
+  for(let i = 0;i < 6; i++)
+ { 
+  let g = player.generators[i] 
+
+ 
+   g.pr1mult = 1;
+   g.amount = 0
+   g.bought = 0
+   g.cost = Decimal.pow(10, Math.pow(i, 2) + 1)
+   g.mult = 1
+  
+  
+ } 
+  player.money = 10
+  player.pr2mult += 10;
+  player.pretiege1cost = 5;
+  player.pr2cost +=50;
 }
 function calculateprogress()
 {
@@ -176,12 +207,18 @@ function updateGUI() {
     canprestige1 = true
     else
     canprestige1 = false
-  
+    if(canprestige2())
+    {
+       document.getElementById("pc2").classList.remove("hidden")
+       document.getElementById("prestigeb2").innerHTML = "Loose all progress <br> but get a boost on prestieging  ";
+    }
+   
+    else
+    document.getElementById("pc2").classList.add("hidden")
   if(canprestige1)
   {
     document.getElementById("pc1").classList.remove("hidden")
-    document.getElementById("prestigeb1").innerHTML = "Loose all progress <br> but get a boost based on gold: " +  Decimal.floor(Decimal.log10(player.money))
-  }
+    document.getElementById("prestigeb1").innerHTML = "Loose all progress <br> but get a boost based on gold ";}
   else
   {
     document.getElementById("pc1").classList.add("hidden")
@@ -222,5 +259,5 @@ function updateGUI() {
   loadGame()
   setInterval(mainLoop, 50)
   setInterval(saveGame,1000)
-  
+  setInterval(maxall,50)
   updateGUI()

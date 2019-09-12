@@ -36,6 +36,7 @@ box-sizing: border-box;
     width: 600px;
    flex-wrap:  wrap;
     margin: auto;
+    margin-top: 75;
 }
 .prestiegecontainer
 {

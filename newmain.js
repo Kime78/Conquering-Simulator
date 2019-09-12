@@ -147,18 +147,15 @@ function pretiege1()
  { 
   let g = player.generators[i] 
 
- 
-   g.pr1mult += ( Decimal.floor(player.money.log10()) *100) * player.pr2mult;
+   if(g.bought != 0)
+   {
+       g.pr1mult = Decimal.add(( Decimal.floor(player.money.log10()) /1.5) * player.pr2mult,g.pr1mult);
+   }
    g.amount = 0
    g.bought = 0
    g.cost = Decimal.pow(10, Math.pow(i, 2) + 1)
    g.mult = 1
-  
 
-   
-  
-  
-   
  }
   canprestige1 = false 
   player.money = 10
@@ -259,5 +256,4 @@ function updateGUI() {
   loadGame()
   setInterval(mainLoop, 50)
   setInterval(saveGame,1000)
-  
   updateGUI()

@@ -90,9 +90,11 @@ box-sizing: border-box;
 }
 .buttons
 {
-  position: relative;
-  bottom: -160;
-  left: 42.3%;
+  position: absolute;
+  top: 160;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
 .tickspeedcontainer
 {

@@ -54,6 +54,24 @@ box-sizing: border-box;
   user-select: none;
     margin: auto;
 }
+.tickspeedcontainer
+{
+    position: relative;
+    
+  bottom: -30;
+    width: 600px;
+   border: 2px solid greenyellow;
+  border-radius:  20px;
+  background-color: lightgrey;
+  text-align: center;
+  width: 300px;
+  padding: 5px;
+  cursor: pointer;
+  user-select: none;
+  margin: auto;
+  margin-bottom: 10px;
+  margin-top: -30px;
+}
 .prestigecontainer2
 {
     position: relative;

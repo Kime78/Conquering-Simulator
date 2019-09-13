@@ -8,11 +8,15 @@ document.getElementById("gen4").classList.add("invisible")
 document.getElementById("gen5").classList.add("invisible")
 document.getElementById("gen6").classList.add("invisible")
 var player = {
-  pr2mult : 1,
-  pr2cost : 100,
-   pretiege1cost : 5,
+    pr2mult : 1,
+    pr2cost : 100,
+    pretiege1cost : 5,
+    tickspeed : new Decimal(1),
+    tickspeedcost : new Decimal(5e3),
     money : new Decimal(10),
     generators : getGens(),
+    tickspeedunlocked: false,
+    tsprestige: 10,
   
 }
 function hidegentab()
@@ -135,7 +139,9 @@ document.onkeyup = function(e) {
    g.mult = 1
    player.money = 10
    player.pr2mult = 1;
+   player.tickspeed = new Decimal(1)
    player.pr2cost = 100;
+   player.tickspeedcost =new Decimal(5e3)
   }
   player.pretiege1cost = 5
 }
@@ -187,6 +193,17 @@ function prestige2()
   player.pretiege1cost = 5;
   player.pr2cost +=50;
 }
+function buytickspeed()
+{
+  if(Decimal.lte(player.tickspeedcost.exponent,player.money.exponent))
+  {
+    player.money= player.money.minus(player.tickspeedcost);
+    player.tickspeed =  Decimal.times(player.tickspeed,.9)
+    player.tickspeedcost = Decimal.times(player.tickspeedcost,10)
+    
+  }
+ 
+}
 function calculateprogress()
 {
  
@@ -212,6 +229,7 @@ function updateGUI() {
    
     else
     document.getElementById("pc2").classList.add("hidden")
+    document.getElementById("tickspeedb").innerHTML = "Tickspeed Boost Cost: " + format(player.tickspeedcost);
   if(canprestige1)
   {
     document.getElementById("pc1").classList.remove("hidden")
@@ -239,7 +257,7 @@ function updateGUI() {
   }
   
   function productionLoop(diff) {
-      player.money = Decimal.add(player.money,Decimal.mul(player.generators[0].amount,Decimal.mul(player.generators[0].mult,Decimal.mul(player.generators[0].pr1mult,diff))))
+      player.money = Decimal.add(player.money,Decimal.mul(player.generators[0].amount,Decimal.mul(player.generators[0].mult,Decimal.mul(player.generators[0].pr1mult,diff))).div(player.tickspeed))
    
     for (let i = 1; i < 6; i++) {
       player.generators[i-1 ].amount =  Decimal.add(player.generators[i-1].amount,Decimal.mul(player.generators[i].amount,Decimal.mul(player.generators[i].mult,Decimal.mul(player.generators[i].pr1mult,diff/5))))

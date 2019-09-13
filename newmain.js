@@ -21,7 +21,11 @@ var player = {
 }
 function hidegentab()
 {
-  document.getElementById("gentab").classList.add("hidden")
+  document.getElementById("gentab").style.display = "none";
+}
+function showgentab()
+{
+  document.getElementById("gentab").style.display = "block";
 }
 function saveGame() {
     localStorage.setItem('save', btoa(JSON.stringify(player)));
@@ -204,6 +208,7 @@ function buytickspeed()
   }
  
 }
+
 function calculateprogress()
 {
  

@@ -23,11 +23,11 @@ box-sizing: border-box;
   width: 100px;
   text-align: center;
   left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-  bottom: -129;
-    cursor: pointer;
-    user-select: none;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  bottom: 20;
+  cursor: pointer;
+  user-select: none;
   
 }
 .generator-container
@@ -42,17 +42,57 @@ box-sizing: border-box;
 {
     position: relative;
     
-  bottom: -30;
+    bottom: -30;
     width: 600px;
-   border: 2px solid greenyellow;
+    border: 2px solid greenyellow;
+    border-radius:  20px;
+    background-color: lightgrey;
+    text-align: center;
+    width: 300px;
+    padding: 5px;
+    cursor: pointer;
+    user-select: none;
+    margin: auto;
+}
+.generatortabcontainer
+{
+  position: relative;
+  bottom: -30;
+  width: 600px;
+  border: 2px solid greenyellow;
   border-radius:  20px;
   background-color: lightgrey;
   text-align: center;
-  width: 300px;
+  width: 100px;
   padding: 5px;
   cursor: pointer;
   user-select: none;
-    margin: auto;
+  margin: auto;
+  display: inline-block;
+ 
+}
+.settingstabcontainer
+{
+  position: relative;
+  bottom: -30;
+  width: 600px;
+  border: 2px solid greenyellow;
+  border-radius:  20px;
+  background-color: lightgrey;
+  text-align: center;
+  width: 100px;
+  padding: 5px;
+  cursor: pointer;
+  user-select: none;
+  margin: auto;
+  display: inline-block;
+  
+}
+.buttons
+{
+  position: relative;
+  bottom: -160;
+  left: 40.5%;
 }
 .tickspeedcontainer
 {

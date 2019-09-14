@@ -199,7 +199,7 @@ function prestige2()
 }
 function buytickspeed()
 {
-  if(Decimal.lte(player.tickspeedcost.exponent,player.money.exponent))
+  if(Decimal.lte(player.tickspeedcost,player.money))
   {
     player.money= player.money.minus(player.tickspeedcost);
     player.tickspeed =  Decimal.times(player.tickspeed,.9)

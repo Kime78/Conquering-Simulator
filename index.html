@@ -6,7 +6,8 @@
     <title>Conquering Simulator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body> 
+    <div id="currency">You have 10 Gold</div>
     <div class="buttons">
          <div class="generatortabcontainer" id="gtc">
     <div class="gtbutton" id="genbutt" onclick="showgentab()">Generators</div>
@@ -19,7 +20,7 @@
        <div id="myProgress">
        <div id="myBar">0%</div>
      </div>
-   <div id="currency">You have 10 Gold</div>
+  
    <div class="maxallclass" id="maxallbutton" onclick="maxall()">MAX ALL</div>   
    
 
@@ -41,6 +42,27 @@
        <div class="prestiege" id="prestigeb1" onclick="pretiege1()"></div>
    </div>
   
+   </div>
+   <div class="Settings-tab" id="settab" style="display: none">
+        <div style="display:none;position:fixed;left:0;top:0"><textarea id="exportOutput" style="color:black; width: 200px; height: 55px;"></textarea></div>
+        <table class="settings-table">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="Save-btn" id="settings" onclick="saveGame()">Save</div>
+                    </td>
+                    <td>
+                        <div class="Load-btn" id="settings" onclick="loadGame(prompt('Input your save:'))">Load</div>
+                    </td>
+                    <td>
+                        <div class="Export-btn" id="settings" onclick="">Export</div>
+                    </td>
+                   <td>
+                       <div class="Reset-btn" id="settings" onclick="reset()">Reset</div>
+                   </td>
+                </tr>
+            </tbody>
+        </table>
    </div>
     <script src="break_infinity.js"></script>
     <script src="newmain.js"></script>

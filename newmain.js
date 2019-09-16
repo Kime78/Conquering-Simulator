@@ -22,10 +22,12 @@ var player = {
 function hidegentab()
 {
   document.getElementById("gentab").style.display = "none";
+  document.getElementById("settab").style.display = "block";
 }
 function showgentab()
 {
   document.getElementById("gentab").style.display = "block";
+  document.getElementById("settab").style.display = "none";
 }
 function saveGame() {
     localStorage.setItem('save', btoa(JSON.stringify(player)));
@@ -44,6 +46,24 @@ function saveGame() {
       
       }
     }
+  }
+  function exportGame() {
+    let output = document.getElementById('exportOutput');
+    let parent = output.parentElement;
+    parent.style.display = "";
+    output.value = btoa(JSON.stringify(player));
+    output.onblur = function() {
+      parent.style.display = "none";
+    }
+    output.focus();
+    output.select();
+  
+    try {
+      document.execCommand('copy');
+   
+      output.blur();
+    } catch(ex) {}
+    
   }
   function uninv(i)
 {
@@ -97,10 +117,7 @@ return generators;
  buyGenerator(i);
  }
 }
-document.onkeyup = function(e) {
-  if (e.which == 77) {
-    maxall()
-  }}
+
   function canBuyGenerator(i) {
     return Decimal.lte(player.generators[i].cost,player.money);
   }
@@ -131,6 +148,8 @@ document.onkeyup = function(e) {
   }
   function reset()
 { 
+  if (confirm("You Will Lose Everything! Press OK To Confirm!")) {
+   
   for(let i = 0;i < 6; i++)
   {
      let g = player.generators[i] 
@@ -149,6 +168,8 @@ document.onkeyup = function(e) {
   }
   player.pretiege1cost = 5
 }
+}
+
 function pretiege1()
 {
     player.pretiege1cost = Decimal.floor(player.money.log10())
@@ -173,7 +194,7 @@ function pretiege1()
 function canprestige2()
 {
   let power = Decimal.floor(Decimal.log10(player.money))
-  if(power >= player.pr2cost && player.generators[0].pr1mult >= 10000)
+  if(power >= player.pr2cost)
   return true;
   return false;
 }
@@ -280,3 +301,9 @@ function updateGUI() {
   setInterval(mainLoop, 50)
   setInterval(saveGame,1000)
   updateGUI()
+  window.addEventListener('keydown', function(event) {
+    if (event.keyCode === 77) {
+      maxall();
+    }
+  });
+  

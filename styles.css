@@ -25,10 +25,33 @@ box-sizing: border-box;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  bottom: 20;
+  bottom: -30;
   cursor: pointer;
   user-select: none;
   
+}
+#settings
+{
+  bottom: -30;
+  width: 600px;
+  border: 2px solid greenyellow;
+  border-radius:  20px;
+  background-color: lightgrey;
+  text-align: center;
+  width: 200px;
+  height: 35;
+  padding: 5px;
+  cursor: pointer;
+  user-select: none;
+  margin: auto;
+}
+.settings-table
+{
+  position: relative;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  top: 150;
 }
 .generator-container
 {
@@ -91,7 +114,7 @@ box-sizing: border-box;
 .buttons
 {
   position: absolute;
-  top: 160;
+  top: 200;
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
@@ -144,6 +167,8 @@ box-sizing: border-box;
     text-align: center;
     font-size: 40px;
     margin: 40px;
+    position: relative;
+    top: 30;
 }
 .generator.locked {
   

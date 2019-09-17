@@ -17,6 +17,7 @@ var player = {
     generators : getGens(),
     tickspeedunlocked: false,
     tsprestige: 10,
+    unlocked: [1,0,0,0,0,0],
   
 }
 function hidegentab()
@@ -71,6 +72,15 @@ function saveGame() {
   if (i == 6)
   return
   document.getElementById("gen" + (i + 1)).classList.remove("invisible")
+  player.unlocked[i] = 1;
+}
+function loadinv()
+{
+  for(let i = 0; i<=6;i++)
+  {
+    if(player.unlocked[i]==1)
+     document.getElementById("gen" + (i + 1)).classList.remove("invisible")
+  }
 }
   function getGens()
 {
@@ -115,6 +125,7 @@ return generators;
  let g = player.generators[i]
  while(Decimal.lte(player.generators[i].cost,player.money))
  buyGenerator(i);
+ player.unlocked[i++] == 1
  }
 }
 
@@ -165,6 +176,7 @@ return generators;
    player.tickspeed = new Decimal(1)
    player.pr2cost = 100;
    player.tickspeedcost =new Decimal(5e3)
+   player.unlocked= [1,0,0,0,0,0];
   }
   player.pretiege1cost = 5
 }
@@ -190,6 +202,7 @@ function pretiege1()
  }
   canprestige1 = false 
   player.money = 10
+  
 }
 function canprestige2()
 {
@@ -217,6 +230,7 @@ function prestige2()
   player.pr2mult += 10;
   player.pretiege1cost = 5;
   player.pr2cost +=50;
+  player.unlocked = [1,0,0,0,0,0]
 }
 function buytickspeed()
 {
@@ -273,9 +287,18 @@ function updateGUI() {
     for (let i = 0; i < 6; i++) {
       let g = player.generators[i]
       document.getElementById("gen" + (i + 1)).innerHTML = "Amount: " + format(g.amount) + "<br>Bought: " + g.bought + "<br>Mult: " + format(g.mult) + "x<br>Cost: " + format(g.cost)
-      if (!canBuyGenerator(i)) document.getElementById("gen" + (i + 1)).classList.add("locked")
+     
+      if (!canBuyGenerator(i))
+      {
+        document.getElementById("gen" + (i + 1)).classList.add("locked")
+      }
+       
       if(canBuyGenerator(i))
-       document.getElementById("gen" + (i + 1)).classList.remove("locked")
+      {
+        document.getElementById("gen" + (i + 1)).classList.remove("locked")
+        
+      }
+       
     }
   }
   function getGeneratorProduction(i) {
@@ -301,6 +324,7 @@ function updateGUI() {
   setInterval(mainLoop, 50)
   setInterval(saveGame,1000)
   updateGUI()
+  loadinv()
   window.addEventListener('keydown', function(event) {
     if (event.keyCode === 77) {
       maxall();

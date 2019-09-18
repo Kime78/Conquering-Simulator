@@ -141,7 +141,7 @@ box-sizing: border-box;
 {
     position: relative;
     
-  bottom: -500;
+  bottom: -40;
     width: 600px;
    border: 2px solid greenyellow;
   border-radius:  20px;

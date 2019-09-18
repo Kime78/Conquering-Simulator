@@ -123,9 +123,9 @@ return generators;
  for(i = 0;i <= 5;i++)
  {
  let g = player.generators[i]
- while(Decimal.lte(player.generators[i].cost,player.money))
+ while(Decimal.lte(g.cost,player.money))
  buyGenerator(i);
- player.unlocked[i++] == 1
+
  }
 }
 

@@ -253,6 +253,7 @@ function calculateprogress()
     widthh = 7;
   else
     widthh = widthh.toFixed(2) * 100 
+    widthh.toFixed(0)
   if(widthh <= 100)
     return widthh
   else

@@ -249,11 +249,14 @@ function calculateprogress()
  
   let power = Decimal.floor(Decimal.log10(player.money))
   widthh = (power/82)
-  widthh = widthh.toFixed(2) * 100 
-  if(widthh <= 100)
-  return widthh
+  if(widthh.toFixed(2)==0.07)
+    widthh = 7;
   else
-  return 100;
+    widthh = widthh.toFixed(2) * 100 
+  if(widthh <= 100)
+    return widthh
+  else
+    return 100;
 }
 function updateGUI() {
     let power = Decimal.floor(Decimal.log10(player.money))

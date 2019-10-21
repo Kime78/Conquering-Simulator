@@ -1045,7 +1045,8 @@ function productionLoop(diff) {
     player.money = Decimal.add(player.money, Decimal.mul(Decimal.mul(player.generators[0].amount, Decimal.mul(player.generators[0].mult, Decimal.mul(player.generators[0].pr1mult, diff))).div(player.tickspeed), player.aliengenboost))
 
     for (let i = 1; i < 6; i++) {
-        player.generators[i - 1].amount = Decimal.add(player.generators[i - 1].amount, Decimal.mul(Decimal.mul(player.generators[i].amount, Decimal.mul(player.generators[i].mult, Decimal.mul(player.generators[i].pr1mult, diff / 5)))), player.aliengenboost)
+        player.generators[i - 1].amount = Decimal.add(player.generators[i - 1].amount, Decimal.mul(player.generators[i].amount, Decimal.mul(player.generators[i].mult, Decimal.mul(player.generators[i].pr1mult, diff / 5))))//, player.aliengenboost)
+
     }
 }
 var fuel1interval = setInterval(function() {

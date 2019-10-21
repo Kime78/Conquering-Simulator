@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,42 +7,67 @@
     <title>Conquering Simulator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body> 
-    <div id="currency">You have 10 Gold</div>
-    <div class="buttons">
-         <div class="generatortabcontainer" id="gtc">
-    <div class="gtbutton" id="genbutt" onclick="showgentab()">Generators</div>
-</div>  
-<div class="settingstabcontainer" id="stc">
-    <div class="stbutton" id="setbutt" onclick="hidegentab()">Settings</div>
-</div> </div>
-        
-   <div class="generator-tab" id="gentab"> 
-       
-  
-   <div class="maxallclass" id="maxallbutton" onclick="maxall()">MAX ALL</div>   
-   
 
-   
-   <div class="generator-container">
-       <div class="generator" id="gen1" onclick="buyGenerator(0)"></div>
-       <div class="generator" id="gen2" onclick="buyGenerator(1)"></div>
-       <div class="generator" id="gen3" onclick="buyGenerator(2)"></div>
-       <div class="generator" id="gen4" onclick="buyGenerator(3)"></div>
-       <div class="generator" id="gen5" onclick="buyGenerator(4)"></div>
-       <div class="generator" id="gen6" onclick="buyGenerator(5)"></div>
-   </div> 
-  <div class="tickspeedcontainer" id="tsc">
-    <div class="tickspeed" id="tickspeedb" onclick="buytickspeed()">test</div>
-</div>
-   <div class="prestiegecontainer" id="pc1">
-       <div class="prestiege" id="prestigeb1" onclick="pretiege1()"></div>
-   </div>
-  <div class="prestigecontainer2" id="pc2">
-   <div class="prestiege2" id="prestigeb2" onclick="prestige2()">test</div>
-   </div>
-   </div>
-   <div class="Settings-tab" id="settab" style="display: none">
+<body bgcolor="#f0f0f0">
+
+    <div id="currency">You have 10 Gold</div>
+<p id="alien-currency">You have 10 Alien Points</p>
+<button class="alien-box" id="alienbox"onclick="alien()">Gain 1e24 Alien Points.</button>
+    <div class="buttons">
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="generatortabcontainer" id="gtc">
+                            <div class="gtbutton" id="genbutt" onclick="showgentab()">Generators</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="settingstabcontainer" id="stc">
+                            <div class="stbutton" id="setbutt" onclick="hidegentab()">Settings</div>
+                        </div>
+
+                    </td>
+                    <td>
+                        <div class="alientabcontainer" id="atc">
+                            <div class="albutton" id="albutt" onclick="showalientab()">Alien</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="generator-tab" id="gentab">
+
+
+        <div class="maxallclass" id="maxallbutton" onclick="maxall()">MAX ALL</div>
+
+
+
+        <div class="generator-container">
+            <div class="generator" id="gen1" onclick="buyGenerator(0)"></div>
+            <div class="generator" id="gen2" onclick="buyGenerator(1)"></div>
+            <div class="generator" id="gen3" onclick="buyGenerator(2)"></div>
+            <div class="generator" id="gen4" onclick="buyGenerator(3)"></div>
+            <div class="generator" id="gen5" onclick="buyGenerator(4)"></div>
+            <div class="generator" id="gen6" onclick="buyGenerator(5)"></div>
+        </div>
+        <div class="tickspeedcontainer" id="tsc">
+            <div class="tickspeed" id="tickspeedb" onclick="buytickspeed()">test</div>
+        </div>
+        <div class="prestiegecontainer" id="pc1">
+            <div class="prestiege" id="prestigeb1" onclick="pretiege1()"></div>
+        </div>
+        <div class="prestigecontainer2" id="pc2">
+            <div class="prestiege2" id="prestigeb2" onclick="prestige2()">test</div>
+        </div>
+        <div id="myProgress">
+            <div id="myBar">0%</div>
+        </div>
+    </div>
+    <div class="Settings-tab" id="settab" style="display: none; top: -125; position: relative;">
         <div style="display:none;position:fixed;left:0;top:0"><textarea id="exportOutput" style="color:black; width: 200px; height: 55px;"></textarea></div>
         <table class="settings-table">
             <tbody>
@@ -55,18 +81,377 @@
                     <td>
                         <div class="Export-btn" id="settings" onclick="">Export</div>
                     </td>
-                   <td>
-                       <div class="Reset-btn" id="settings" onclick="reset()">Reset</div>
-                   </td>
+                    <td>
+                        <div class="Reset-btn" id="settings" onclick="reset()">Reset</div>
+                    </td>
                 </tr>
             </tbody>
         </table>
-   </div>
-   <div id="myProgress">
-    <div id="myBar">0%</div>
-  </div>
+    </div>
+    <div class="alien-tab" id="altab" style="display: none; top: -110; position: relative; height: 1;">
+        <table class="settings-table">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="alientabcontent">
+                            <div class="stbutton" id="setbutt" onclick="showstudy()">Alien Studies</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="alientabcontent" id="fuelbutt" style="display: none">
+                            <div class="stbutton" id="setbutt" onclick="showfuel()">Alien Fuel</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="alientabcontent" id="autobutt" style="display: none">
+                            <div class="stbutton" id="setbutt" onclick="showautobuyer()">Autobuyers</div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="alientabcontent" id="upbutt" style="display: none">
+                            <div class="stbutton" id="setbutt" onclick="showupgrades()">Alien Upgrades</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alien-content">
+            <div class="alien-study" id="ats" style="display: none">
+                <canvas id="treeCanvas" width="2000" height="1500">
+
+                </canvas>
+
+                <div class="middle">
+                    <button class="alienstudycontainer" id="studyy0">
+                        <div class="as1" id="study0" onclick="buytreeupgrade(0)">Tickspeed cost multiplier decrease by 25%<br>Cost: 1 AP</div>
+                    </button>
+                </div>
+                <div class="middle">
+                    <button class="alienstudycontainer" id="studyy1">
+                        <div class="as1" id="study1" onclick="buytreeupgrade(1)">Unlock Alien Upgrades<br>Cost: 10 AP</div>
+                    </button>
+                </div>
+
+                <tbody>
+                    <table class="alien-table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <button class="alienstudycontainer" id="studyy21">
+                                        <div class="as22" id="study21" onclick="buytreeupgrade(21)">Multiplier on all dimensions based on how many times pristieged<br>Cost: 50 AP</div>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="alienstudycontainer" id="studyy22">
+                                        <div class="as22" id="study22" onclick="buytreeupgrade(22)">Decrease Generator cost by 5%<br>Cost: 50 AP</div>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="alienstudycontainer" id="studyy31">
+                                        <div class="as31" id="study31" onclick="buytreeupgrade(31)">Prestige 1 cost decrease<br>Cost: 100 AP</div>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="alienstudycontainer" id="studyy32">
+                                        <div class="as32" id="study32" onclick="buytreeupgrade(32)">Prestige 2 cost decrease<br>Cost: 100 AP</div>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button class="alienstudycontainer" id="studyy41">
+                                        <div class="as41" id="study41" onclick="buytreeupgrade(41)">Prestige 1 upgraded formula<br>Cost: 250 AP</div>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="alienstudycontainer" id="studyy42">
+                                        <div class="as42" id="study42" onclick="buytreeupgrade(42)">Prestige 2 ugraded formula<br>Cost: 250 AP</div>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="middle">
+                        <button class="alienstudycontainer" id="studyy5">
+                            <div class="as5" id="study5" onclick="buytreeupgrade(5)">Unlock Alien Fuel<br>Cost: 1e3 AP</div>
+                        </button>
+                    </div>
+
+                    <div class="middle">
+                        <button class="alienstudycontainer" id="studyy6">
+                            <div class="as6" id="study6" onclick="buytreeupgrade(6)">Unlock Autobuyers<br>Cost: 1e12 AP</div>
+                        </button>
+                    </div>
+                    <div class="middle">
+                        <button class="alienstudycontainer" id="studyy7">
+                            <div class="as7" id="study7" onclick="buytreeupgrade(7)">Unlock Auto Alien Fuel<br>Cost: 1e25 AP</div>
+                        </button>
+                    </div>
+                    <div class="middle">
+                        <button class="alienstudycontainer" id="studyy8">
+                            <div class="as8" id="study8" onclick="buytreeupgrade(8)">Finish the Game<br>Cost: 1e50 AP</div>
+                        </button>
+                    </div>
+
+
+
+
+            </div>
+            <div class="alien-fuel" id="alf" style="display: none">
+                <div id="fuelcurrency">You have X Alien Fuel</div>
+                <div>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td class="fuel-text">
+                                                    First Generator
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fuel-text">
+                                                    Second Generator
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fuel-text">
+                                                    Third Generator
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fuel-text">
+                                                    Forth Generator
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fuel-text">
+                                                    Fifth Generator
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fuel-text">
+                                                    Sixth Generator
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fuel-text">
+                                                    Seventh Generator
+
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="fuel-text">
+                                                    Eighth Generator
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <button class="alien-generator" id="fm1" onclick="buymultfuel(0)">Buy a excavator<br>Cost: 1e69<br>Amount: 1</button>
+                                                    <button class="alien-generator" id="fs1" onclick="buyspeedalienfuel1()">Upgrade Speed <br> Cost: 1e420 <br>Amount: 1</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button class="alien-generator" id="fm2" onclick="buymultfuel(1)">Buy a excavator<br>Cost: 1e69<br>Amount: 1</button>
+                                                    <button class="alien-generator" id="fs2" onclick="buyspeedalienfuel2()">Upgrade Speed <br> Cost: 1e420 <br>Amount: 1</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button class="alien-generator" id="fm3" onclick="buymultfuel(2)">Buy a excavator<br>Cost: 1e69<br>Amount: 1</button>
+                                                    <button class="alien-generator" id="fs3" onclick="buyspeedalienfuel3()">Upgrade Speed <br> Cost: 1e420 <br>Amount: 1</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button class="alien-generator" id="fm4" onclick="buymultfuel(3)">Buy a excavator<br>Cost: 1e69<br>Amount: 1</button>
+                                                    <button class="alien-generator" id="fs4" onclick="buyspeedalienfuel4()">Upgrade Speed <br> Cost: 1e420 <br>Amount: 1</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button class="alien-generator" id="fm5" onclick="buymultfuel(4)">Buy a excavator<br>Cost: 1e69<br>Amount: 1</button>
+                                                    <button class="alien-generator" id="fs5" onclick="buyspeedalienfuel5()">Upgrade Speed <br> Cost: 1e420 <br>Amount: 1</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button class="alien-generator" id="fm6" onclick="buymultfuel(5)">Buy a excavator<br>Cost: 1e69<br>Amount: 1</button>
+                                                    <button class="alien-generator" id="fs6" onclick="buyspeedalienfuel6()">Upgrade Speed <br> Cost: 1e420 <br>Amount: 1</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button class="alien-generator" id="fm7" onclick="buymultfuel(6)">Buy a excavator<br>Cost: 1e69<br>Amount: 1</button>
+                                                    <button class="alien-generator" id="fs7" onclick="buyspeedalienfuel7()">Upgrade Speed <br> Cost: 1e420 <br>Amount: 1</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button class="alien-generator" id="fm8" onclick="buymultfuel(7)">Buy a excavator<br>Cost: 1e69<br>Amount: 1</button>
+                                                    <button class="alien-generator" id="fs8" onclick="buyspeedalienfuel8()">Upgrade Speed <br> Cost: 1e420 <br>Amount: 1</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+            <div class="autobuyers" id="auto" style="display: none">
+                <div class="alien-content3" id="autoo">
+                    <table class="middle">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="autobuyer">First Autobuyer
+                                        <button class="autobuyerbtn" id="autospeed1" onclick="buyspeedautobuyer1()">Upgrade Speed <br> Cost : X</button>
+                                        
+                                        <span class="autointerval" id="ai1">Current interval: </span>
+                                        <br>
+                                        <span class="autoactive">Is Active: </span>
+                                        <input type="checkbox" onchange="" class="autoactive" id="1ison">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="autobuyer">Second Autobuyer
+                                        <button class="autobuyerbtn" id="autospeed2" onclick="buyspeedautobuyer2()">Upgrade Speed<br> Cost : X</button>
+                                        <span class="autointerval" id="ai2">Current interval: </span>
+                                        <br>
+                                        <span class="autoactive">Is Active: </span>
+                                        <input type="checkbox" onchange="" class="autoactive" id="2ison">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="autobuyer">Third Autobuyer
+                                        <button class="autobuyerbtn" id="autospeed3" onclick="buyspeedautobuyer3()">Upgrade Speed<br> Cost : X</button>
+                                        <span class="autointerval" id="ai3">Current interval: </span>
+                                        <br>
+                                        <span class="autoactive">Is Active: </span>
+                                        <input type="checkbox" onchange="" class="autoactive" id="3ison">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="autobuyer">Forth Autobuyer
+                                        <button class="autobuyerbtn" id="autospeed4" onclick="buyspeedautobuyer4()">Upgrade Speed<br> Cost : X</button>
+                                        <span class="autointerval" id="ai4">Current interval: </span>
+                                        <br>
+                                        <span class="autoactive">Is Active: </span>
+                                        <input type="checkbox" onchange="" class="autoactive" id="4ison">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="autobuyer">Fifth Autobuyer
+                                        <button class="autobuyerbtn" id="autospeed5" onclick="buyspeedautobuyer5()">Upgrade Speed<br> Cost : X</button>
+                                        <span class="autointerval" id="ai5">Current interval: </span>
+                                        <br>
+                                        <span class="autoactive">Is Active: </span>
+                                        <input type="checkbox" onchange="" class="autoactive" id="5ison">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="autobuyer">Sixth Autobuyer
+                                        <button class="autobuyerbtn" id="autospeed6" onclick="buyspeedautobuyer6()">Upgrade Speed<br> Cost : X</button>
+                                        <span class="autointerval" id="ai6">Current interval: </span>
+                                        <br>
+                                        <span class="autoactive">Is Active: </span>
+                                        <input type="checkbox" onchange="" class="autoactive" id="6ison">
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="autobuyer">Prestige 1 Autobuyer
+                                        <button class="autobuyerbtn" id="autospeed7" onclick="buyspeedautobuyer7()">Upgrade Speed<br> Cost : X</button>
+                                        <span class="autointerval" id="ai7">Current interval: </span>
+                                        <br>
+                                        <span class="autoactive">Is Active: </span>
+                                        <input type="checkbox" onchange="" class="autoactive" id="7ison">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="autobuyer">Prestige 2 Autobuyer
+                                        <button class="autobuyerbtn" id="autospeed8" onclick="buyspeedautobuyer8()">Upgrade Speed<br> Cost : X</button>
+                                        <span class="autointerval" id="ai8">Current interval: </span>
+                                        <br>
+                                        <span class="autoactive">Is Active: </span>
+                                        <input type="checkbox" onchange="" class="autoactive" id="8ison">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="autobuyer">Tickspeed Autobuyer
+                                        <button class="autobuyerbtn" id="autospeed9" onclick="buyspeedautobuyer9()">Upgrade Speed<br> Cost : X</button>
+                                        <span class="autointerval" id="ai9">Current interval: </span>
+                                        <br>
+                                        <span class="autoactive">Is Active: </span>
+                                        <input type="checkbox" onchange="" class="autoactive" id="9ison">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="middle">
+                        <div class="autobuyer" id="afbutt" style="display: none">Fuel Autobuyer
+                            <button class="autobuyerbtn" id="autospeed10" onclick="buyspeedautobuyer10()">Upgrade Speed<br> Cost : X</button>
+                            <span class="autointerval" id="ai10">Current interval: </span>
+                            <br>
+                            <span class="autoactive">Is Active: </span>
+                            <input type="checkbox" onchange="" class="autoactive" id="10ison">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alien-upgrades" id="aup" style="display: none">
+                <div class="alien-content4" id="upgrade">
+                    <table class="middle">
+                        <tr>
+                            <td>
+                                <button class="upgradebtn">Double all money gain<br>Current boost: x80<br>Cost: 100</button>
+                            </td>
+
+
+                            <td>
+                                <button class="upgradebtn">Double AP capacity<br>Current capacity: 420<br>Cost: 100</button>
+                            </td>
+
+
+                            <td>
+                                <button class="upgradebtn">Double AP gain<br>Current boost: x80<br>Cost: 100</button>
+                            </td>
+                        </tr>
+               
+                    </table>
+                    <div class="middle">
+                            <button class="upgradebtn" >Double tickspeed gain<br>Current boost: x80<br>Cost: 100</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     <script src="break_infinity.js"></script>
     <script src="newmain.js"></script>
-    
+    <script src="canvas.js"></script>
 </body>
+
 </html>
